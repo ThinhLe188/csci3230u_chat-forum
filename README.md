@@ -1,1 +1,5 @@
-# csci3230u_chat-forum
+# CSCI 3230U - Final Project
+
+## Chat Forum
+
+### Group 23
