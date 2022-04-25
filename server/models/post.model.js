@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const Post = new mongoose.Schema({
-    _id: {type: String, default: () => nanoid()},
     creatorId: {type: String, required: true},
     content: {type: String, required: true},
     upVotes: {type: Number, default: 0},

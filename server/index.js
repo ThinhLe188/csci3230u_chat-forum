@@ -13,7 +13,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 8000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI, { 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/chat-forum', { 
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
