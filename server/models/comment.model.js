@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
-const Post = new mongoose.Schema({
+const Comment = new mongoose.Schema({
     _id: {type: String, default: () => nanoid()},
+    parentId: {type: String, required: true},
+    childId: {type: String, required: true},
     creatorId: {type: String, required: true},
     content: {type: String, required: true},
     upVotes: {type: Number, default: 0},
@@ -10,7 +12,7 @@ const Post = new mongoose.Schema({
     image: String,
     date: {type: Date, default: new Date()},
 },{
-    collection: 'posts'
+    collection: 'comments'
 })
 
-module.exports = mongoose.model('posts', Post);
+module.exports = mongoose.model('comments', Comment);

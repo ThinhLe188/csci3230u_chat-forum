@@ -8,11 +8,12 @@
                             <div class="mb-md-1 mt-md-4 pb-4">
                                 <h2 class="fw-bold mb-4 text-uppercase text-center">Login</h2>
                                 <div class="form-outline form-white mb-4">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Email"/>
+                                    <input type="email" class="form-control form-control-lg" placeholder="Email" v-model="email"/>
                                 </div>
                                 <div class="form-outline form-white mb-4">
-                                    <input type="password" class="form-control form-control-lg" placeholder="Password"/>
+                                    <input type="password" class="form-control form-control-lg" placeholder="Password" v-model="password"/>
                                 </div>
+                                <div class="m-4" v-if="errorMessage">{{errorMessage}}</div>
                                 <div class="text-center">
                                     <button class="btn btn-outline-light btn-lg px-5 mx-auto" type="submit">Login</button>
                                 </div>
