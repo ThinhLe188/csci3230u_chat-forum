@@ -36,6 +36,7 @@ export default {
           auth: true,
           msg: res.data.msg
         }
+        this.loginStatus(true)
         return callback(mes)
       })
       .catch(err => {
@@ -43,7 +44,30 @@ export default {
           auth: false,
           msg: err.response.data
         }
+        this.loginStatus(false)
         return callback(mes)
       })
+  },
+
+  loggedIn () {
+    return !!localStorage.token
+  },
+
+  logout (callback) {
+    localStorage.clear()
+    this.loginStatus(false)
+    return callback()
+  },
+
+  loginStatus () {},
+
+  getUsername (callback) {
+    axios.get('http://localhost:8000/user/profile', {
+      headers: {
+        'auth-token': localStorage.token
+      }
+    }).then(res => {
+      return callback(res.data.username)
+    })
   }
 }

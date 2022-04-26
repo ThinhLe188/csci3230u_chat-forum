@@ -12,15 +12,15 @@
                     <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" v-if="!loggedIn" href="/login">Login</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li v-if="loggedIn" class="nav-item dropdown bg-dark">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Username
+                        {{username}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/profile">Profile</a>
-                        <a class="dropdown-item" href="/login">Logout</a>
+                        <a class="dropdown-item" v-on:click="logout">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -31,6 +31,34 @@
         </div>
     </nav>
 </template>
+
+<script>
+import auth from '../scripts/auth'
+export default {
+  name: 'NavBar',
+  data () {
+    return {
+      loggedIn: auth.loggedIn(),
+      username: null
+    }
+  },
+  created () {
+    auth.loginStatus = loggedIn => {
+      this.loggedIn = loggedIn
+      auth.getUsername(res => {
+        this.username = res
+      })
+    }
+  },
+  methods: {
+    logout: function () {
+      auth.logout(res => {
+        this.$router.replace('/login')
+      })
+    }
+  }
+}
+</script>
 
 <style scoped lang="scss">
     nav {
