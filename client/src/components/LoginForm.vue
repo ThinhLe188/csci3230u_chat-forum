@@ -10,7 +10,7 @@
                             <form class="mb-md-1 mt-md-4 pb-4" @submit.prevent="handleSubmit">
                                 <h2 class="fw-bold mb-4 text-uppercase text-center">Login</h2>
                                 <div class="form-outline form-white mb-4">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Email" v-model="email" required/>
+                                    <input type="texr" class="form-control form-control-lg" placeholder="Email" v-model="email" required/>
                                 </div>
                                 <div class="form-outline form-white mb-4">
                                     <input type="password" class="form-control form-control-lg" placeholder="Password" v-model="password" required/>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import auth from '../auth/auth'
+import auth from '../scripts/auth'
 
 export default {
   name: 'LoginForm',

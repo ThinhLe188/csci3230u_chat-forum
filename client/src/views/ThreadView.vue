@@ -8,7 +8,6 @@
     </pre>
 
     <div class="test_layout">
-      
     </div>
   </div>
 </template>

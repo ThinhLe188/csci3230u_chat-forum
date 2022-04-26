@@ -13,7 +13,7 @@
                                     <input type="text" class="form-control form-control-lg" placeholder="Username" v-model="username" required/>
                                 </div>
                                 <div class="form-outline form-white mb-4">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Email" v-model="email" required/>
+                                    <input type="text" class="form-control form-control-lg" placeholder="Email" v-model="email" required/>
                                 </div>
                                 <div class="form-outline form-white mb-4">
                                     <input type="password" class="form-control form-control-lg" placeholder="Password" v-model="password" required/>
@@ -21,8 +21,7 @@
                                 <div class="form-outline form-white mb-4">
                                     <input type="password" class="form-control form-control-lg" placeholder="Password Confirmation" v-model="passwordConfirm" required/>
                                 </div>
-                                <div class="m-4 text-center alert alert-success" v-if="isAuth">{{message}}</div>
-                                <div class="m-4 text-center alert alert-danger" v-if="message && !isAuth">{{message}}</div>
+                                <div class="m-4 text-center alert alert-danger" v-if="errorMessage">{{errorMessage}}</div>
                                 <div class="text-center">
                                     <button class="btn btn-outline-light btn-lg px-5 mx-auto" type="submit">Sign Up</button>
                                 </div>
@@ -39,7 +38,7 @@
 </template>
 
 <script>
-import auth from '../auth/auth'
+import auth from '../scripts/auth'
 
 export default {
   name: 'RegisterForm',
@@ -49,19 +48,21 @@ export default {
       email: null,
       password: null,
       passwordConfirm: null,
-      message: null,
-      isAuth: false
+      errorMessage: null
     }
   },
   methods: {
     handleSubmit () {
       if (this.password !== this.passwordConfirm) {
-        this.message = 'Passwords do not match'
+        this.errorMessage = 'Passwords do not match'
         return
       }
       auth.register(this.username, this.email, this.password, (res) => {
-        this.isAuth = res.auth
-        this.message = res.msg
+        if (res.auth) {
+          this.$router.replace('/login')
+          return
+        }
+        this.errorMessage = res.msg
       })
     }
   }
