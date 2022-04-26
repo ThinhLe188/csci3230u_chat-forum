@@ -1,5 +1,8 @@
 <template>
   <div>
-    Home
+    <pre>
+    Almost Heaven...
+    West Virginia
+    </pre>
   </div>
 </template>

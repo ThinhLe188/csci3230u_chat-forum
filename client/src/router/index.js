@@ -6,6 +6,7 @@ import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import AccountView from '../views/AccountView.vue'
+import ThreadView from '../views/ThreadView.vue'
 
 const routes = [
   {
@@ -32,7 +33,12 @@ const routes = [
     path: '/account',
     name: 'account',
     component: AccountView
-  }
+  },
+  {
+    path: '/Thread',
+    name: 'thread',
+    component: ThreadView
+  },
 ]
 
 const router = createRouter({
