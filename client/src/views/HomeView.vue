@@ -1,8 +1,15 @@
 <template>
-  <div>
-    <pre>
-    Almost Heaven...
-    West Virginia
-    </pre>
-  </div>
+  <HomeList/>
 </template>
+
+<script>
+import HomeList from '../components/HomeList.vue'
+
+export default {
+  name: 'HomeView',
+  components: {
+    HomeList
+  }
+}
+
+</script>
