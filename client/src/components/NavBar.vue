@@ -39,20 +39,17 @@ export default {
   data () {
     return {
       loggedIn: auth.loggedIn(),
-      username: null
+      username: auth.getUsername()
     }
   },
   created () {
     auth.loginStatus = loggedIn => {
       this.loggedIn = loggedIn
-      auth.getUsername(res => {
-        this.username = res
-      })
     }
   },
   methods: {
     logout: function () {
-      auth.logout(res => {
+      auth.logout((res) => {
         this.$router.replace('/login')
       })
     }

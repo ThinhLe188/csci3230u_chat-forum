@@ -4,6 +4,7 @@ const dotenv = require('dotenv').config();
 const cors = require('cors');
 
 const userRoute = require('./router/user');
+const threadRoute = require('./router/thread');
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.get('/', function(req, res){
 
 
 app.use('/user', userRoute);
+app.use('/thread', threadRoute);
 
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

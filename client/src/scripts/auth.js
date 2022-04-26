@@ -61,13 +61,23 @@ export default {
 
   loginStatus () {},
 
-  getUsername (callback) {
+  getProfile (callback) {
     axios.get('http://localhost:8000/user/profile', {
       headers: {
-        'auth-token': localStorage.token
+        'auth-token': localStorage?.token
       }
     }).then(res => {
-      return callback(res.data.username)
+      localStorage.username = res.data.username
+      localStorage.email = res.data.email
+      return callback()
     })
+  },
+
+  getUsername () {
+    return localStorage?.username
+  },
+
+  getEmail () {
+    return localStorage?.email
   }
 }

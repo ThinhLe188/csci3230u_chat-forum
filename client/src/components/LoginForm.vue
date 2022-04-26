@@ -47,8 +47,9 @@ export default {
     handleSubmit () {
       auth.login(this.email, this.password, (res) => {
         if (res.auth) {
-          this.$router.replace('/')
-          return
+          auth.getProfile((res) => {
+            this.$router.replace('/')
+          })
         }
         this.errorMessage = res.msg
       })
