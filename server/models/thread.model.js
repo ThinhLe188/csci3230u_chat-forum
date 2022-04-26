@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
 
-const Comment = new mongoose.Schema({
-    parentId: {
-        type: String,
-        required: true
-    },
-    childId: {
-        type: String,
-        required: true
-    },
+const Thread = new mongoose.Schema({
     creatorId: {
         type: String,
         required: true
+    },
+    parentId: {
+        type: String,
+        required: true,
+        default: '-1'
     },
     content: {
         type: String,
@@ -32,7 +29,7 @@ const Comment = new mongoose.Schema({
     tags: [String],
     image: String,
 },{
-    collection: 'comments'
+    collection: 'threads'
 })
 
-module.exports = mongoose.model('comments', Comment);
+module.exports = mongoose.model('threads', Thread);
