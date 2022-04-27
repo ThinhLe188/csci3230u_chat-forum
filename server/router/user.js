@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -81,7 +82,7 @@ router.get('/:id', verify, async (req, res) => {
     const id = req.params.id;
     // User's id validation
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send(`No post with id: ${id}`);
+        return res.status(404).send(`No user with id: ${id}`);
     }
     // Send username back to client
     const user = await User.findById(id);
