@@ -7,7 +7,6 @@ const Thread = new mongoose.Schema({
     },
     parentId: {
         type: String,
-        required: true,
         default: '-1'
     },
     content: {
@@ -18,10 +17,15 @@ const Thread = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    comments: {
+        type: Number,
+        default: 0
+    },
     date: {
         type: Date,
         default: Date.now
     },
+    title: String,
     tags: [String],
     image: String,
 },{

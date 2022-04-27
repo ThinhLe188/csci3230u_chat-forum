@@ -57,8 +57,10 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/profile', verify, async (req, res) => {
+    // User data validation
     const token = req.header('auth-token');
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    // Send user info back to client
     const user = await User.findById(verified.id);
     return res.status(201).send({username: user.username, email: user.email});
 });
