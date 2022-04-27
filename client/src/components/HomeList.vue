@@ -1,7 +1,7 @@
 <template>
   <div id="table" class="p-4">
     <!-- Button trigger modal -->
-    <button
+    <button v-if="loggedIn"
       type="button"
       class="btn btn-primary"
       data-toggle="modal"
@@ -74,10 +74,13 @@
 </template>
 
 <script>
+import auth from '../scripts/auth'
+
 export default {
   name: 'HomeList',
   data () {
     return {
+      loggedIn: auth.loggedIn(),
       likes: 0,
       title: '',
       message: '',
@@ -85,9 +88,6 @@ export default {
     }
   },
   methods: {
-    onClick () {
-      console.log('A')
-    },
     getThreadInfo () {
       // console.log(this.$refs.title.value)
       // console.log(this.$refs.message.value)
