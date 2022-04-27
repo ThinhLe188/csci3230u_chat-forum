@@ -48,79 +48,6 @@
         <!-- Comment Section -->
         <div id=comment_section></div>
 
-        <!-- <div class="post form-outline">
-          <div class="test_layout row">
-            <div class="test_layout col-12 title">
-              <h5>
-                Username
-              </h5>
-            </div>
-          </div>
-          <div class="test_layout row">
-            <div class="test_layout col-11">
-              Content:  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
-          <div style="height:10px"></div>
-          </div>
-
-          <div style="height:10px"></div>
-
-        <div class="post form-outline">
-          <div class="test_layout row">
-            <div class="test_layout col-12 title">
-              <h5>
-                Username
-              </h5>
-            </div>
-          </div>
-          <div class="test_layout row">
-            <div class="test_layout col-11">
-              Content:  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
-          <div style="height:10px"></div>
-          <div class="row">
-            <div class="col-1">
-            </div>
-            <div class="col-11">
-              <div class="post">
-          <div class="row">
-            <div class="col-12 title">
-              <h5>
-                Username
-              </h5>
-            </div>
-          </div>
-          <div class=" row">
-            <div class="col-11">
-              Content:  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
-            </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div style="height:10px"></div>
-
-        <div class="post">
-          <div class="test_layout row">
-            <div class="test_layout col-12 title">
-              <h5>
-                Username
-              </h5>
-            </div>
-          </div>
-          <div class="test_layout row">
-            <div class="test_layout col-10">
-              Content:  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </div>
-          </div>
-          <div style="height:10px"></div>
-        </div>
-        -->
         <div style="height:10px"></div>
 
         <!-- End of Main region -->
@@ -238,6 +165,11 @@ function buildComment (id, parentDiv) {
   elementB = document.createElement('i')
   elementB.setAttribute('class', 'bi bi-hand-thumbs-down hover_button dislike')
   elementA.appendChild(elementB)
+  // Reply
+  elementB = document.createElement('i')
+  elementB.setAttribute('class', 'bi bi-reply hover_button reply')
+  elementB.setAttribute('style', 'padding-left:8px;padding-right:8px')
+  elementA.appendChild(elementB)
 
   // Replies
   elementA = document.createElement('div')
@@ -275,6 +207,9 @@ textarea {
 }
 .dislike:hover {
   color: red;
+}
+.reply:hover {
+  color: blue;
 }
 .hover_button:hover {
   cursor: pointer;
