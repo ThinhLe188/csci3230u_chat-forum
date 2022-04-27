@@ -63,7 +63,7 @@ router.post('/', verify, async (req, res) => {
   try {
     const newThread = await thread.save();
     const creator = await User.findById(creatorId);
-    const updateCreator = await Thread.findByIdAndUpdate(creatorId, {posts: creator.posts + 1}, {new: true})
+    const updateCreator = await User.findByIdAndUpdate(creatorId, {posts: creator.posts + 1}, {new: true})
     res.status(201).send({
       thread: newThread,
       msg: 'Post added successfully'
@@ -98,7 +98,7 @@ router.post('/:id', verify, async (req, res) => {
     const parentThread = await Thread.findById(parentId);
     const updateParentThread = await Thread.findByIdAndUpdate(parentId, {comments: parentThread.comments + 1}, {new: true})
     const creator = await User.findById(creatorId);
-    const updateCreator = await Thread.findByIdAndUpdate(creatorId, {comments: creator.comments + 1}, {new: true})
+    const updateCreator = await User.findByIdAndUpdate(creatorId, {comments: creator.comments + 1}, {new: true})
     res.status(201).send({
       thread: newThread,
       msg: 'Comment added successfully'
