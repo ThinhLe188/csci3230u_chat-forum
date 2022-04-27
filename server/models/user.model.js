@@ -30,7 +30,8 @@ const User = new mongoose.Schema({
     votes: {
         type: Number,
         default: 0
-    }
+    },
+    likedPosts: [String]
 },{
     collection: 'users'
 })

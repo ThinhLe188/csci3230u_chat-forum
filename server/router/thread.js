@@ -2,6 +2,7 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
+const User = require('../models/user.model');
 const Thread = require('../models/thread.model');
 const verify = require('../auth/verifyToken');
 
@@ -61,6 +62,8 @@ router.post('/', verify, async (req, res) => {
   })
   try {
     const newThread = await thread.save();
+    const creator = await User.findById(creatorId);
+    const updateCreator = await Thread.findByIdAndUpdate(creatorId, {posts: creator.posts + 1}, {new: true})
     res.status(201).send({
       thread: newThread,
       msg: 'Post added successfully'
@@ -94,6 +97,8 @@ router.post('/:id', verify, async (req, res) => {
     const newThread = await thread.save();
     const parentThread = await Thread.findById(parentId);
     const updateParentThread = await Thread.findByIdAndUpdate(parentId, {comments: parentThread.comments + 1}, {new: true})
+    const creator = await User.findById(creatorId);
+    const updateCreator = await Thread.findByIdAndUpdate(creatorId, {comments: creator.comments + 1}, {new: true})
     res.status(201).send({
       thread: newThread,
       msg: 'Comment added successfully'
@@ -131,6 +136,10 @@ router.patch('/:id', verify, async (req, res) => {
 // Update votes for post or comment
 router.patch('/vote/:id', verify, async (req, res) => {
   const id = req.params.id;
+  // Get user's id
+  const token = req.header('auth-token');
+  const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  const userId = verified.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send(`No thread with id: ${id}`);
@@ -139,6 +148,11 @@ router.patch('/vote/:id', verify, async (req, res) => {
   try {
     const thread = await Thread.findById(id);
     const updatedThread = await Thread.findByIdAndUpdate(id, {votes: thread.votes + 1}, {new: true})
+    const user = await User.findById(userId);
+    const updateUser = await User.findByIdAndUpdate(userId, {
+      likedPosts: user.likedPosts.push(updatedThread._id),
+      votes: user.votes + 1
+    }, {new: true})
     res.status(200).send({
       thread: updatedThread,
       msg: 'Updated votes successfully'
