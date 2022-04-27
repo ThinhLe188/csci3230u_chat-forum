@@ -1,5 +1,17 @@
 <template>
   <div id="table" class="p-4 vh-100 bg_page">
+    <h1 class="logo">
+      <span>F </span>
+      <span class="cuboid">
+          <span class="cuboid-face cuboid-face-front"></span>
+          <span class="cuboid-face cuboid-face-back"></span>
+          <span class="cuboid-face cuboid-face-top"></span>
+          <span class="cuboid-face cuboid-face-bottom"></span>
+          <span class="cuboid-face cuboid-face-left"></span>
+          <span class="cuboid-face cuboid-face-right"></span>
+      </span>
+      <span> RUM</span>
+    </h1>
     <!-- Button trigger modal -->
     <button id="create-thread" v-if="loggedIn"
       type="button"
@@ -134,4 +146,65 @@ export default {
     color: rgb(255, 89, 0);
     text-decoration: underline;
   }
+
+.logo {
+    font-size: calc(1em + 3vw);
+    letter-spacing: 0.08em;
+    color: rgb(255, 89, 0);
+    text-transform: uppercase;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.cuboid,
+.cuboid-face {
+    display: inline-block;
+}
+
+.cuboid {
+    font-size: 0.8em;
+    position: relative;
+    height: 0.5em;
+    width: 1em;
+    vertical-align: middle;
+    transform-style: preserve-3d;
+    transform: rotateX(-40deg) rotateY(-45deg);
+}
+
+.cuboid-face {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0.08em solid rgb(255, 89, 0);;
+}
+
+.cuboid-face-top,
+.cuboid-face-bottom {
+    height: 1em;
+}
+
+.cuboid-face-front {
+    transform: translateZ(0.5em);
+}
+
+.cuboid-face-back {
+    transform: rotateY(180deg) translateZ(0.5em);
+}
+
+.cuboid-face-left {
+    transform: rotateY(-90deg) translateZ(0.5em);
+}
+
+.cuboid-face-right {
+    transform: rotateY(90deg) translateZ(0.5em);
+}
+
+.cuboid-face-top {
+    transform: rotateX(90deg) translateZ(0.5em);
+}
+
+.cuboid-face-bottom {
+    transform: rotateX(-90deg);
+}
 </style>
