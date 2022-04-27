@@ -34,6 +34,7 @@
 
 <script>
 import User from '../scripts/user'
+
 export default {
   name: 'NavBar',
   data () {

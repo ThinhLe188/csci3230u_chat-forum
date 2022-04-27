@@ -11,20 +11,20 @@
                       </div>
                   </div>
               </div>
-              <div class="bg-light p-4 d-flex justify-content-end text-center">
+              <div type="button" data-toggle="modal" data-target="#chartModal" class="bg-light p-4 d-flex justify-content-end text-center">
                   <ul class="list-inline mb-0">
                       <li class="list-inline-item">
-                          <h5 class="font-weight-bold mb-0 d-block">{{post}}</h5>
+                          <h5 class="font-weight-bold mb-0 d-block">{{stat.posts}}</h5>
                           <small class="text-muted">
                           <i class="fas fa-image mr-1"></i>Post</small>
                       </li>
                       <li class="list-inline-item">
-                          <h5 class="font-weight-bold mb-0 d-block">{{comment}}</h5>
+                          <h5 class="font-weight-bold mb-0 d-block">{{stat.comments}}</h5>
                           <small class="text-muted"> <i class="fas fa-user mr-1">
                           </i>Comment</small>
                       </li>
                       <li class="list-inline-item">
-                          <h5 class="font-weight-bold mb-0 d-block">{{likes}}</h5>
+                          <h5 class="font-weight-bold mb-0 d-block">{{stat.votes}}</h5>
                           <small class="text-muted"> <i class="fas fa-user mr-1">
                           </i>Likes</small>
                       </li>
@@ -40,22 +40,34 @@
               </div>
           </div>
       </div>
+      <!-- Chart -->
+      <ChartPage/>
   </div>
 </template>
 
 <script>
-import user from '../scripts/user'
+import ChartPage from './ChartPage.vue'
+import User from '../scripts/user'
 
 export default {
   name: 'ProfilePage',
+  components: { ChartPage },
   data () {
     return {
-      username: user.getUsername(),
-      email: user.getEmail(),
-      post: 0,
-      comment: 0,
-      likes: 0
+      username: User.getUsername(),
+      email: User.getEmail(),
+      stat: {},
+      showChart: true
     }
+  },
+  created: function () {
+    User.getStat((res) => {
+      if (res.success) {
+        this.stat = res.stat
+      } else {
+        console.log(res.msg)
+      }
+    })
   }
 }
 </script>

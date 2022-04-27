@@ -62,9 +62,7 @@ export default {
     }).then((res) => {
       const mes = {
         success: true,
-        posts: res.data.posts,
-        comments: res.data.comments,
-        votes: res.data.votes
+        stat: res.data
       }
       return callback(mes)
     }).catch((err) => {
