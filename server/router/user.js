@@ -68,13 +68,20 @@ router.get('/stat', verify, async (req, res) => {
     const token = req.header('auth-token');
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     const id = verified.id
-    // User's id validation
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send(`No user with id: ${id}`);
-    }
     // Send user's stat back to client
     const user = await User.findById(id);
     return res.status(200).send({posts: user.posts, comments: user.comments, votes: user.votes});
+})
+
+// Get liked posts
+router.get('/liked', verify, async (req, res) => {
+    // Get user's id
+    const token = req.header('auth-token');
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    const id = verified.id
+    // Send user's liked posts back to client
+    const user = await User.findById(id);
+    return res.status(200).send({likedPosts: user.likedPosts});
 })
 
 // Get username by id

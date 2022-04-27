@@ -52,10 +52,33 @@ export default {
     return callback()
   },
 
+  // Update loginStatus
   loginStatus () {},
 
+  // Get user's stat
   getStat (callback) {
     axios.get('http://localhost:8000/user/stat', {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }).then((res) => {
+      const mes = {
+        success: true,
+        stat: res.data
+      }
+      return callback(mes)
+    }).catch((err) => {
+      const mes = {
+        success: false,
+        msg: err.response.data
+      }
+      return callback(mes)
+    })
+  },
+
+  // Get liked posts
+  getLikedPosts (callback) {
+    axios.get('http://localhost:8000/user/liked', {
       headers: {
         'auth-token': localStorage?.token
       }
@@ -82,6 +105,7 @@ export default {
     return localStorage?.email
   },
 
+  // Get other username by id
   getUsernameById (userId, callback) {
     axios.get(`http://localhost:8000/user/${userId}`, {
       headers: {
