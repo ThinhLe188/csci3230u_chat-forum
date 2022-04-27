@@ -1,5 +1,5 @@
 <template>
-  <div class="row py-5 px-4">
+  <div class="row py-5 px-4 vh-100 profile_page">
       <div class="col-md-5 mx-auto">
           <!-- Profile widget -->
           <div class="bg-white shadow rounded overflow-hidden">
@@ -73,12 +73,16 @@ export default {
 </script>
 
 <style>
+  .profile_page {
+    background: linear-gradient(to right, #009fff, #ec2f4b);
+  }
+
   .profile-head {
     transform: translateY(5rem)
   }
 
   .cover {
-    background: black;
+    background: linear-gradient(to right, #283048, #859398);
     background-size: cover;
     background-repeat: no-repeat
   }
