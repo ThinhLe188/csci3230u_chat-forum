@@ -68,7 +68,11 @@ export default {
 
   // Add new post
   addPost (newPost, callback) {
-    axios.post('http://localhost:8000/thread', newPost)
+    axios.post('http://localhost:8000/thread', {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }, newPost)
     .then(res => {
       const mes = {
         success: true,
@@ -88,7 +92,11 @@ export default {
 
   // Add new comment or child comment
   addComment (newComment, parentId, callback) {
-    axios.post(`http://localhost:8000/thread/${parentId}`, newComment)
+    axios.post(`http://localhost:8000/thread/${parentId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }, newComment)
     .then(res => {
       const mes = {
         success: true,
@@ -108,7 +116,11 @@ export default {
 
   // Update post or comment
   updateThread (updatedThread, parentId, callback) {
-    axios.patch(`http://localhost:8000/thread/${parentId}`, updatedThread)
+    axios.patch(`http://localhost:8000/thread/${parentId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }, updatedThread)
     .then(res => {
       const mes = {
         success: true,
@@ -128,7 +140,11 @@ export default {
 
   // Update votes for post or comment
   updateVotes (updatedThread, parentId, callback) {
-    axios.patch(`http://localhost:8000/thread/vote/${parentId}`, updatedThread)
+    axios.patch(`http://localhost:8000/thread/vote/${parentId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }, updatedThread)
     .then(res => {
       const mes = {
         success: true,
@@ -148,7 +164,11 @@ export default {
 
   // Delete post or comment
   deleteThread (threadId, callback) {
-    axios.delete(`http://localhost:8000/thread/${threadId}`)
+    axios.delete(`http://localhost:8000/thread/${threadId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    })
     .then(res => {
       const mes = {
         success: true,
