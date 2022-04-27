@@ -164,9 +164,8 @@ function getThread (id) {
   }
 }
 function getUsername (id) {
-  return JoeUsername
+  return 'Joe Username'
 }
-
 function getReplies (id) {
   if (id === 1) {
     return [2, 3, 4]
