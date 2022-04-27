@@ -73,21 +73,21 @@ export default {
         'auth-token': localStorage?.token
       }
     }, newPost)
-    .then(res => {
-      const mes = {
-        success: true,
-        post: res.data.thread,
-        msg: res.data.msg
-      }
-      return callback(mes)
-    })
-    .catch(err => {
-      const mes = {
-        success: false,
-        msg: err.response.data
-      }
-      return callback(mes)
-    })
+      .then(res => {
+        const mes = {
+          success: true,
+          post: res.data.thread,
+          msg: res.data.msg
+        }
+        return callback(mes)
+      })
+      .catch(err => {
+        const mes = {
+          success: false,
+          msg: err.response.data
+        }
+        return callback(mes)
+      })
   },
 
   // Add new comment or child comment
@@ -97,21 +97,21 @@ export default {
         'auth-token': localStorage?.token
       }
     }, newComment)
-    .then(res => {
-      const mes = {
-        success: true,
-        comment: res.data.thread,
-        msg: res.data.msg
-      }
-      return callback(mes)
-    })
-    .catch(err => {
-      const mes = {
-        success: false,
-        msg: err.response.data
-      }
-      return callback(mes)
-    })
+      .then(res => {
+        const mes = {
+          success: true,
+          comment: res.data.thread,
+          msg: res.data.msg
+        }
+        return callback(mes)
+      })
+      .catch(err => {
+        const mes = {
+          success: false,
+          msg: err.response.data
+        }
+        return callback(mes)
+      })
   },
 
   // Update post or comment
@@ -121,21 +121,21 @@ export default {
         'auth-token': localStorage?.token
       }
     }, updatedThread)
-    .then(res => {
-      const mes = {
-        success: true,
-        thread: res.data.thread,
-        msg: res.data.msg
-      }
-      return callback(mes)
-    })
-    .catch(err => {
-      const mes = {
-        success: false,
-        msg: err.response.data
-      }
-      return callback(mes)
-    })
+      .then(res => {
+        const mes = {
+          success: true,
+          thread: res.data.thread,
+          msg: res.data.msg
+        }
+        return callback(mes)
+      })
+      .catch(err => {
+        const mes = {
+          success: false,
+          msg: err.response.data
+        }
+        return callback(mes)
+      })
   },
 
   // Update votes for post or comment
@@ -145,21 +145,21 @@ export default {
         'auth-token': localStorage?.token
       }
     }, updatedThread)
-    .then(res => {
-      const mes = {
-        success: true,
-        thread: res.data.thread,
-        msg: res.data.msg
-      }
-      return callback(mes)
-    })
-    .catch(err => {
-      const mes = {
-        success: false,
-        msg: err.response.data
-      }
-      return callback(mes)
-    })
+      .then(res => {
+        const mes = {
+          success: true,
+          thread: res.data.thread,
+          msg: res.data.msg
+        }
+        return callback(mes)
+      })
+      .catch(err => {
+        const mes = {
+          success: false,
+          msg: err.response.data
+        }
+        return callback(mes)
+      })
   },
 
   // Delete post or comment
@@ -169,19 +169,19 @@ export default {
         'auth-token': localStorage?.token
       }
     })
-    .then(res => {
-      const mes = {
-        success: true,
-        msg: res.data
-      }
-      return callback(mes)
-    })
-    .catch(err => {
-      const mes = {
-        success: false,
-        msg: err.response.data
-      }
-      return callback(mes)
-    })
+      .then(res => {
+        const mes = {
+          success: true,
+          msg: res.data
+        }
+        return callback(mes)
+      })
+      .catch(err => {
+        const mes = {
+          success: false,
+          msg: err.response.data
+        }
+        return callback(mes)
+      })
   }
 }

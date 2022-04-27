@@ -89,6 +89,8 @@
 
 <script>
 import User from '../scripts/user'
+import Thread from '../scripts/thread'
+// console.log(localStorage?.token)
 
 export default {
   name: 'HomeList',
@@ -115,6 +117,19 @@ export default {
       this.$refs.title.value = null
       this.$refs.message.value = null
       console.log(this.threads)
+
+      const newThread = {
+        creatorId: localStorage?.token,
+        parentId: '-1',
+        content: this.message,
+        votes: 0,
+        comments: 0,
+        date: Date.now(),
+        title: this.title,
+        tags: [],
+        image: ''
+      }
+      Thread.addPost(newThread, (res) => {})
     }
   }
 }
