@@ -173,13 +173,22 @@ router.patch('/vote/:id', verify, async (req, res) => {
 // Delete post or comment
 router.delete('/:id', verify, async (req, res) => {
   const id = req.params.id;
+  // Get user's id
+  const token = req.header('auth-token');
+  const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  const creatorId = verified.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send(`No thread with id: ${id}`);
   }
   try {
-    const deletedThread = await Thread.findByIdAndRemove(id);
-    res.status(200).send('Deleted successfully');
+    const thread = await Thread.findById(id);
+    if (thread.creatorId === creatorId) {
+      const deletedThread = await Thread.findByIdAndRemove(id);
+      res.status(200).send('Deleted successfully');
+    } else {
+      res.status(401).send('Access denied');
+    }
   } catch (err) {
     res.status(400).send(err);
   }
