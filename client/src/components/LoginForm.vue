@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 <template>
-    <section class="vh-100 gradient-custom">
+    <section class="vh-100 bg_page">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -61,9 +61,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-    .gradient-custom {
-        font-weight: bold;
-        background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    .bg_page {
+        background:
+        linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
+        linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
+        linear-gradient(315deg, black 25%, transparent 25%),
+        linear-gradient(45deg, black 25%, transparent 25%);
+        background-size: 2em 2em;
+        background-color: #161616;
     }
 
     ::placeholder {
