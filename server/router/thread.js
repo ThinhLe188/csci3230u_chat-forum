@@ -111,6 +111,10 @@ router.post('/:id', verify, async (req, res) => {
 // Update post or comment
 router.patch('/:id', verify, async (req, res) => {
   const id = req.params.id;
+  // Get user's id
+  const token = req.header('auth-token');
+  const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  const creatorId = verified.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).send(`No thread with id: ${id}`);
@@ -118,16 +122,20 @@ router.patch('/:id', verify, async (req, res) => {
   // Update thread
   try {
     const thread = await Thread.findById(id);
-    const updatedThread = await Thread.findByIdAndUpdate(id, {
-      content: req.body?.content,
-      title: req.body?.title,
-      tags: req.body?.tags,
-      image: req.body?.image
-    }, {new: true})
-    res.status(200).send({
-      thread: updatedThread,
-      msg: 'Updated successfully'
-    });
+    if (thread.creatorId === creatorId) {
+      const updatedThread = await Thread.findByIdAndUpdate(id, {
+        content: req.body?.content,
+        title: req.body?.title,
+        tags: req.body?.tags,
+        image: req.body?.image
+      }, {new: true})
+      res.status(200).send({
+        thread: updatedThread,
+        msg: 'Updated successfully'
+      });
+    } else {
+      res.status(401).send('Access denied');
+    }
   } catch (err) {
     res.status(400).send(err);
   }
