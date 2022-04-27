@@ -13,7 +13,7 @@ router.get('/', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-}),
+});
 
 // Get all user's posts
 router.get('/user/', verify, async (req, res) => {
@@ -27,7 +27,7 @@ router.get('/user/', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-})
+});
 
 // Get all comments of a post or a parent comment
 router.get('/comment/:id', verify, async (req, res) => {
@@ -43,7 +43,7 @@ router.get('/comment/:id', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-})
+});
 
 // Add new posts
 router.post('/', verify, async (req, res) => {
@@ -67,7 +67,7 @@ router.post('/', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-}),
+});
 
 // Add new comment or sub-comment
 router.post('/:id', verify, async (req, res) => {
@@ -99,7 +99,7 @@ router.post('/:id', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-}),
+});
 
 // Update posts or comments
 router.patch('/:id', verify, async (req, res) => {
@@ -124,7 +124,7 @@ router.patch('/:id', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-}),
+});
 
 // Update votes for posts or comments
 router.patch('/vote/:id', verify, async (req, res) => {
@@ -144,7 +144,7 @@ router.patch('/vote/:id', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-}),
+});
 
 // Delete posts or comments
 router.delete('/:id', verify, async (req, res) => {
@@ -161,7 +161,7 @@ router.delete('/:id', verify, async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
-})
+});
 
 
 module.exports = router;

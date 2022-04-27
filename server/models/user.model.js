@@ -19,6 +19,18 @@ const User = new mongoose.Schema({
         min: 6,
         max: 30
     },
+    posts: {
+        type: Number,
+        default: 0
+    },
+    comments: {
+        type: Number,
+        default: 0
+    },
+    votes: {
+        type: Number,
+        default: 0
+    }
 },{
     collection: 'users'
 })
