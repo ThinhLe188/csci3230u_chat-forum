@@ -119,17 +119,12 @@ export default {
       console.log(this.threads)
 
       const newThread = {
-        creatorId: localStorage?.token,
-        parentId: '-1',
         content: this.message,
-        votes: 0,
-        comments: 0,
-        date: Date.now(),
-        title: this.title,
-        tags: [],
-        image: ''
+        title: this.title
       }
-      Thread.addPost(newThread, (res) => {})
+      Thread.addPost(newThread, (res) => {
+        console.log(res)
+      })
     }
   }
 }
