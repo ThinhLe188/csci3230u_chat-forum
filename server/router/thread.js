@@ -16,6 +16,17 @@ router.get('/', verify, async (req, res) => {
   }
 });
 
+// Get post by id
+router.get('/:id', verify, async (req, res) => {
+  const id = req.params.id;
+  try {
+    const post = await Thread.findById(id);
+    res.status(200).send(post);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 // Get all user's posts
 router.get('/user', verify, async (req, res) => {
   // Get user's id

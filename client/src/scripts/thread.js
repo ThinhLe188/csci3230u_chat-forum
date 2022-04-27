@@ -24,6 +24,27 @@ export default {
     })
   },
 
+  // Get post by id
+  getPostById (postId, callback) {
+    axios.get(`http://localhost:8000/thread/${postId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }).then((res) => {
+      const mes = {
+        success: true,
+        post: res.data
+      }
+      return callback(mes)
+    }).catch((err) => {
+      const mes = {
+        success: false,
+        msg: err.response.data
+      }
+      return callback(mes)
+    })
+  },
+
   // Get user's posts
   getUserPosts (callback) {
     axios.get('http://localhost:8000/thread/user', {
