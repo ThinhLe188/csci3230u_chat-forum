@@ -163,9 +163,11 @@ function getThread (id) {
     image: ''
   }
 }
+
 function getUsername (id) {
   return 'Joe Username'
 }
+
 function getReplies (id) {
   if (id === 1) {
     return [2, 3, 4]
@@ -190,7 +192,7 @@ function buildComment (id, parentDiv) {
   parentDiv.appendChild(spacer)
 
   var postForm = document.createElement('div')
-  postForm.setAttribute('style', 'padding: 10px; outline: 1px solid black;')
+  postForm.setAttribute('class', 'post')
   parentDiv.appendChild(postForm)
 
   // Username
@@ -253,7 +255,7 @@ function buildComment (id, parentDiv) {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .body {
   margin-right: 20px;
 }
@@ -267,12 +269,6 @@ textarea {
 .post {
   padding: 10px;
   outline: 1px solid black !important;
-}
-.title {
-  //padding: 10px;
-}
-.test_layout {
-  //outline: 3px solid black;
 }
 .like:hover {
   color: rgb(1, 187, 1);
