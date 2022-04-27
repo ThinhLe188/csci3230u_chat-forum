@@ -12,12 +12,14 @@
     <table class="table table-hover">
       <tr>
         <th style="width: 5%">KARMA</th>
-        <th style="width: 95%">TITLE</th>
+        <th style="width: 90%">TITLE</th>
+        <th style="width: 5%">BY</th>
       </tr>
       <tbody>
         <tr v-for="thread in threads" :key="thread.title">
           <th v-on:click="thread[0] += 1" scope="row" ref="likes">{{thread[0]}}</th>
           <td>{{thread[1]}}</td>
+          <td>{{username}}</td>
         </tr>
       </tbody>
     </table>
@@ -81,9 +83,11 @@ export default {
   data () {
     return {
       loggedIn: auth.loggedIn(),
+      username: auth.getUsername(),
       likes: 0,
       title: '',
       message: '',
+      threadCount: 0,
       threads: []
     }
   },
@@ -93,7 +97,8 @@ export default {
       // console.log(this.$refs.message.value)
       this.title = this.$refs.title.value
       this.message = this.$refs.message.value
-      this.threads.push([this.likes, this.title, this.message])
+      this.threadCount += 1
+      this.threads.push([this.likes, this.title, this.message, this.threadCount])
       // clear the inputs
       this.$refs.title.value = null
       this.$refs.message.value = null
