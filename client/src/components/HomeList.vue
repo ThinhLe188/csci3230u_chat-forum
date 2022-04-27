@@ -1,27 +1,5 @@
 <template>
   <div id="table" class="p-4">
-    <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th style="width: 5%">KARMA</th>
-                    <th style="width: 95%">TITLE</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">0</th>
-                    <td>TITLE HERE</td>
-                </tr>
-                <tr>
-                    <th scope="row">0</th>
-                    <td>TITLE HERE</td>
-                </tr>
-                <tr>
-                    <th scope="row">0</th>
-                    <td>TITLE HERE</td>
-                </tr>
-            </tbody>
-        </table>
     <!-- Button trigger modal -->
     <button
       type="button"
@@ -31,7 +9,18 @@
     >
       Create Thread
     </button>
-
+    <table class="table table-hover">
+      <tr>
+        <th style="width: 5%">KARMA</th>
+        <th style="width: 95%">TITLE</th>
+      </tr>
+      <tbody>
+        <tr v-for="thread in threads" :key="thread.title">
+          <th v-on:click="thread[0] += 1" scope="row" ref="likes">{{thread[0]}}</th>
+          <td>{{thread[1]}}</td>
+        </tr>
+      </tbody>
+    </table>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -55,16 +44,16 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form @submit.prevent="getFormValues">
               <div class="form-group">
                 <label for="title-name" class="col-form-label">Title:</label>
-                <input type="text" class="form-control" id="recipient-name" />
+                <input type="text" class="form-control" ref="title" />
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label"
-                  >Message:</label
-                >
-                <textarea class="form-control" id="message-text"></textarea>
+                <label for="message-text" class="col-form-label" name="message-label">
+                  Message:
+                </label>
+                <textarea class="form-control" ref="message" id="message-text"></textarea>
               </div>
             </form>
           </div>
@@ -76,7 +65,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Submit Thread</button>
+            <button type="button" @click.prevent="getThreadInfo()" class="btn btn-primary" data-dismiss="modal">Submit Thread</button>
           </div>
         </div>
       </div>
@@ -86,7 +75,31 @@
 
 <script>
 export default {
-  name: 'HomeList'
+  name: 'HomeList',
+  data () {
+    return {
+      likes: 0,
+      title: '',
+      message: '',
+      threads: []
+    }
+  },
+  methods: {
+    onClick () {
+      console.log('A')
+    },
+    getThreadInfo () {
+      // console.log(this.$refs.title.value)
+      // console.log(this.$refs.message.value)
+      this.title = this.$refs.title.value
+      this.message = this.$refs.message.value
+      this.threads.push([this.likes, this.title, this.message])
+      // clear the inputs
+      this.$refs.title.value = null
+      this.$refs.message.value = null
+      console.log(this.threads)
+    }
+  }
 }
 </script>
 
