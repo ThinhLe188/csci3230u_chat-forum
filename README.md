@@ -7,7 +7,7 @@
 | Group Member Name  |        GitHub Username (GitHub URL)         |
 | :----------------: | :-----------------------------------------: |
 |      Thinh Le      | [ThinhLe188](https://github.com/ThinhLe188) |
-| FirstName LastName |       [Username](https://github.com/)       |
+|      Tony Ling     | [Tony-Ling](https://github.com/Tony-Ling)   |
 | FirstName LastName |       [Username](https://github.com/)       |
 | FirstName LastName |       [Username](https://github.com/)       |
 | FirstName LastName |       [Username](https://github.com/)       |
