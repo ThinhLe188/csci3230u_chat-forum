@@ -16,7 +16,7 @@ router.get('/', verify, async (req, res) => {
 });
 
 // Get all user's posts
-router.get('/user/', verify, async (req, res) => {
+router.get('/user', verify, async (req, res) => {
   // Get user's id
   const token = req.header('auth-token');
   const verified = jwt.verify(token, process.env.TOKEN_SECRET);
@@ -34,25 +34,26 @@ router.get('/comment/:id', verify, async (req, res) => {
   const parentId = req.params.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(parentId)) {
-    return res.status(404).send(`No post with id: ${parentId}`);
+    return res.status(404).send(`No thread with id: ${parentId}`);
   }
   // Get comments
   try {
-    const posts = await Thread.find({"parentId": parentId});
-    res.status(200).send(posts);
+    const comments = await Thread.find({"parentId": parentId});
+    res.status(200).send(comments);
   } catch (err) {
     res.status(400).send(err);
   }
 });
 
-// Add new posts
+// Add new post
 router.post('/', verify, async (req, res) => {
   // Get user's id
   const token = req.header('auth-token');
   const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  const creatorId = verified.id;
   // Create a new thread
   const thread = new Thread ({
-    creatorId: verified.id,
+    creatorId: creatorId,
     content: req.body.content,
     title: req.body?.title,
     tags: req.body?.tags,
@@ -61,7 +62,7 @@ router.post('/', verify, async (req, res) => {
   try {
     const newThread = await thread.save();
     res.status(201).send({
-      id: thread._id,
+      thread: newThread,
       msg: 'Post added successfully'
     });
   } catch (err) {
@@ -69,19 +70,20 @@ router.post('/', verify, async (req, res) => {
   }
 });
 
-// Add new comment or sub-comment
+// Add new comment or child comment
 router.post('/:id', verify, async (req, res) => {
   const parentId = req.params.id;
   // Get user's id
   const token = req.header('auth-token');
   const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+  const creatorId = verified.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(parentId)) {
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No thread with id: ${parentId}`);
   }
   // Create a new child thread
   const thread = new Thread ({
-    creatorId: verified.id,
+    creatorId: creatorId,
     parentId: parentId,
     content: req.body.content,
     tags: req.body?.tags,
@@ -93,7 +95,7 @@ router.post('/:id', verify, async (req, res) => {
     const parentThread = await Thread.findById(parentId);
     const updateParentThread = await Thread.findByIdAndUpdate(parentId, {comments: parentThread.comments + 1}, {new: true})
     res.status(201).send({
-      id: thread._id,
+      thread: newThread,
       msg: 'Comment added successfully'
     });
   } catch (err) {
@@ -101,12 +103,12 @@ router.post('/:id', verify, async (req, res) => {
   }
 });
 
-// Update posts or comments
+// Update post or comment
 router.patch('/:id', verify, async (req, res) => {
   const id = req.params.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No thread with id: ${id}`);
   }
   // Update thread
   try {
@@ -118,7 +120,7 @@ router.patch('/:id', verify, async (req, res) => {
       image: req.body?.image
     }, {new: true})
     res.status(200).send({
-      id: thread._id,
+      thread: updatedThread,
       msg: 'Updated successfully'
     });
   } catch (err) {
@@ -126,19 +128,19 @@ router.patch('/:id', verify, async (req, res) => {
   }
 });
 
-// Update votes for posts or comments
+// Update votes for post or comment
 router.patch('/vote/:id', verify, async (req, res) => {
   const id = req.params.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No thread with id: ${id}`);
   }
   // Update thread's votes
   try {
     const thread = await Thread.findById(id);
     const updatedThread = await Thread.findByIdAndUpdate(id, {votes: thread.votes + 1}, {new: true})
     res.status(200).send({
-      id: thread._id,
+      thread: updatedThread,
       msg: 'Updated votes successfully'
     });
   } catch (err) {
@@ -146,18 +148,16 @@ router.patch('/vote/:id', verify, async (req, res) => {
   }
 });
 
-// Delete posts or comments
+// Delete post or comment
 router.delete('/:id', verify, async (req, res) => {
   const id = req.params.id;
   // Post's id validation
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No thread with id: ${id}`);
   }
   try {
     const deletedThread = await Thread.findByIdAndRemove(id);
-    res.status(200).send({
-      msg: 'Deleted successfully'
-    });
+    res.status(200).send('Deleted successfully');
   } catch (err) {
     res.status(400).send(err);
   }

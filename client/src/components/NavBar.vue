@@ -33,23 +33,24 @@
 </template>
 
 <script>
-import auth from '../scripts/auth'
+import User from '../scripts/user'
 export default {
   name: 'NavBar',
   data () {
     return {
-      loggedIn: auth.loggedIn(),
-      username: auth.getUsername()
+      loggedIn: User.loggedIn(),
+      username: User.getUsername()
     }
   },
   created () {
-    auth.loginStatus = loggedIn => {
+    User.loginStatus = loggedIn => {
       this.loggedIn = loggedIn
+      this.username = User.getUsername()
     }
   },
   methods: {
     logout: function () {
-      auth.logout((res) => {
+      User.logout((res) => {
         this.$router.replace('/login')
       })
     }

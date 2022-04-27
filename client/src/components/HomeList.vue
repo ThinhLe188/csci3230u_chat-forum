@@ -76,14 +76,14 @@
 </template>
 
 <script>
-import auth from '../scripts/auth'
+import User from '../scripts/user'
 
 export default {
   name: 'HomeList',
   data () {
     return {
-      loggedIn: auth.loggedIn(),
-      username: auth.getUsername(),
+      loggedIn: User.loggedIn(),
+      username: User.getUsername(),
       likes: 0,
       title: '',
       message: '',

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import auth from '../scripts/auth'
+import User from '../scripts/user'
 
 export default {
   name: 'LoginForm',
@@ -45,11 +45,13 @@ export default {
   },
   methods: {
     handleSubmit () {
-      auth.login(this.email, this.password, (res) => {
+      const user = {
+        email: this.email,
+        password: this.password
+      }
+      User.login(user, (res) => {
         if (res.auth) {
-          auth.getProfile((res) => {
-            this.$router.replace('/')
-          })
+          this.$router.replace('/')
         }
         this.errorMessage = res.msg
       })

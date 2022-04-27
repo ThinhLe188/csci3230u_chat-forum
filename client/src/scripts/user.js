@@ -1,12 +1,7 @@
 import axios from 'axios'
 
 export default {
-  register (username, email, password, callback) {
-    const newUser = {
-      username: username,
-      email: email,
-      password: password
-    }
+  register (newUser, callback) {
     axios.post('http://localhost:8000/user/register', newUser)
       .then(res => {
         const mes = {
@@ -24,14 +19,12 @@ export default {
       })
   },
 
-  login (email, password, callback) {
-    const user = {
-      email: email,
-      password: password
-    }
+  login (user, callback) {
     axios.post('http://localhost:8000/user/login', user)
       .then(res => {
         localStorage.token = res.data.token
+        localStorage.username = res.data.username
+        localStorage.email = res.data.email
         const mes = {
           auth: true,
           msg: res.data.msg
@@ -61,15 +54,25 @@ export default {
 
   loginStatus () {},
 
-  getProfile (callback) {
-    axios.get('http://localhost:8000/user/profile', {
+  getStat (callback) {
+    axios.get('http://localhost:8000/user/stat', {
       headers: {
         'auth-token': localStorage?.token
       }
-    }).then(res => {
-      localStorage.username = res.data.username
-      localStorage.email = res.data.email
-      return callback()
+    }).then((res) => {
+      const mes = {
+        success: true,
+        posts: res.data.posts,
+        comments: res.data.comments,
+        votes: res.data.votes
+      }
+      return callback(mes)
+    }).catch((err) => {
+      const mes = {
+        success: false,
+        msg: err.response.data
+      }
+      return callback(mes)
     })
   },
 
@@ -79,5 +82,25 @@ export default {
 
   getEmail () {
     return localStorage?.email
+  },
+
+  getUsernameById (userId, callback) {
+    axios.get(`http://localhost:8000/user/${userId}`, {
+      headers: {
+        'auth-token': localStorage?.token
+      }
+    }).then((res) => {
+      const mes = {
+        success: true,
+        username: res.data.username
+      }
+      return callback(mes)
+    }).catch((err) => {
+      const mes = {
+        success: false,
+        msg: err.response.data
+      }
+      return callback(mes)
+    })
   }
 }

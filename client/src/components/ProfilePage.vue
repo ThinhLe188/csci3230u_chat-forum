@@ -44,14 +44,14 @@
 </template>
 
 <script>
-import auth from '../scripts/auth'
+import user from '../scripts/user'
 
 export default {
   name: 'ProfilePage',
   data () {
     return {
-      username: auth.getUsername(),
-      email: auth.getEmail(),
+      username: user.getUsername(),
+      email: user.getEmail(),
       post: 0,
       comment: 0,
       likes: 0

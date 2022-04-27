@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import auth from '../scripts/auth'
+import User from '../scripts/user'
 
 export default {
   name: 'RegisterForm',
@@ -57,7 +57,12 @@ export default {
         this.errorMessage = 'Passwords do not match'
         return
       }
-      auth.register(this.username, this.email, this.password, (res) => {
+      const newUser = {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }
+      User.register(newUser, (res) => {
         if (res.auth) {
           this.$router.replace('/login')
           return
