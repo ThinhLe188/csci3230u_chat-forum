@@ -53,16 +53,17 @@ router.post('/login', async (req, res) => {
     }
     // Create JWT token
     const token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET)
-    res.header('auth-token', token).status(201).send({token: token, msg: 'Logged in'});
+    res.header('auth-token', token).status(200).send({token: token, msg: 'Logged in'});
 })
 
 router.get('/profile', verify, async (req, res) => {
-    // User data validation
+    // Get user's id
     const token = req.header('auth-token');
     const verified = jwt.verify(token, process.env.TOKEN_SECRET);
     // Send user info back to client
     const user = await User.findById(verified.id);
-    return res.status(201).send({username: user.username, email: user.email});
+    return res.status(200).send({username: user.username, email: user.email});
 });
+
 
 module.exports = router;
