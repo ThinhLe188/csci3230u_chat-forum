@@ -9,7 +9,7 @@
 |     Thinh Le      |  [ThinhLe188](https://github.com/ThinhLe188)  |
 |     Tony Ling     |   [Tony-Ling](https://github.com/Tony-Ling)   |
 |   William Dolan   |        [Username](https://github.com/)        |
-|     Kevin Lau     |        [Username](https://github.com/)        |
+|     Kevin Lau     | [Kevinlau24](https://github.com/KevinLau24)   |
 |    John Tovera    | [John-Tovera](https://github.com/John-Tovera) |
 
 [Independent.Study.Web.App.Dev.pdf](https://github.com/ThinhLe188/csci3230u_chat-forum/files/8577691/Independent.Study.Web.App.Dev.pdf)
