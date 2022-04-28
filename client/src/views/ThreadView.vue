@@ -61,6 +61,8 @@
 
 <script>
 import ReplyModal from '../components/ReplyModal.vue'
+// import User from '../scripts/user'
+import Thread from '../scripts/thread'
 
 export default {
   name: 'ThreadView',
@@ -68,37 +70,32 @@ export default {
     ReplyModal
   }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
   var postId = 1
-  var mainThread = getThread(postId)
 
-  setReply('1')
-  document.getElementById('thread_title').innerHTML = mainThread.title
+  getThread(postId).then((mainThread) => {
+    setReply('1')
+    document.getElementById('thread_title').innerHTML = mainThread.title
 
-  document.getElementById('poster_name').innerHTML = getUsername(mainThread.creatorId)
+    document.getElementById('poster_name').innerHTML = getUsername(mainThread.creatorId)
 
-  const postedDate = new Date(mainThread.date)
-  document.getElementById('posted_date').innerHTML = postedDate.toDateString()
+    const postedDate = new Date(mainThread.date)
+    document.getElementById('posted_date').innerHTML = postedDate.toDateString()
 
-  document.getElementById('thread_content').innerHTML = mainThread.content
+    document.getElementById('thread_content').innerHTML = mainThread.content
 
-  document.getElementById('likes').innerHTML = mainThread.votes
+    document.getElementById('likes').innerHTML = mainThread.votes
 
-  buildCommentSection(getReplies(postId), document.getElementById('comment_section'))
+    buildCommentSection(getReplies(postId), document.getElementById('comment_section'))
+  })
 }, false)
 
-function getThread (id) {
-  return {
-    creatorId: 1,
-    parentId: 0,
-    content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-    votes: 17,
-    date: Date.now(),
-    title: 'Thread Title!',
-    tags: [],
-    image: ''
-  }
+async function getThread (id) {
+  id = '6269b062717bc733e4278306'
+  var thread = await Thread.getPostById(id, (res) => {
+    console.log(res)
+  })
+  return thread.post
 }
 
 function setReply (id) {
@@ -147,6 +144,7 @@ function buildComment (id, parentDiv) {
   elementA.appendChild(elementB)
 
   elementA = document.createElement('h5')
+  elementA.setAttribute('style', 'float: left;')
   elementA.innerHTML = getUsername(comment.creatorId)
   elementB.appendChild(elementA)
 
