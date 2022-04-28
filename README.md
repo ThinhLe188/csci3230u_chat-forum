@@ -39,10 +39,10 @@ The backend features, include database and API requests work properly
 
 For users:
 
-![alt text](images/User_db.png)
+![alt text](images/User-db.png)
 
 For posts and comments:
 
-![alt text](images/Thread_db_1.png)
+![alt text](images/Thread-db-1.png)
 
-![alt text](images/Thread_db_2.png)
+![alt text](images/Thread-db-2.png)
