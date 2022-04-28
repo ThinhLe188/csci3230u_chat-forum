@@ -45,14 +45,13 @@ export default {
   },
   data () {
     return {
-      stat: []
+      stat: this.userStat
     }
   },
-  mounted () {
-    this.stat = Object.values(this.userStat)
-  },
-  created: function () {
-    var data = this.userStat
+  async mounted () {
+    await this.$nextTick()
+    var data = Object.values(this.stat)
+    data = [4, 20, 60]
     var svg = d3.select('svg')
     var width = svg.attr('width')
     var height = svg.attr('height')

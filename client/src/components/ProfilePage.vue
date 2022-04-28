@@ -40,34 +40,23 @@
               </div>
           </div>
       </div>
-      <!-- Chart -->
-      <ChartPage :stat="stat"/>
   </div>
 </template>
 
 <script>
-import ChartPage from './ChartPage.vue'
 import User from '../scripts/user'
 
 export default {
   name: 'ProfilePage',
-  components: { ChartPage },
+  props: {
+    stat: Object
+  },
   data () {
     return {
       username: User.getUsername(),
       email: User.getEmail(),
-      stat: {},
       showChart: true
     }
-  },
-  created: function () {
-    User.getStat((res) => {
-      if (res.success) {
-        this.stat = res.stat
-      } else {
-        console.log(res.msg)
-      }
-    })
   }
 }
 </script>
