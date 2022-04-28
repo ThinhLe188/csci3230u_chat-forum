@@ -28,4 +28,4 @@ You can find it here: http://localhost:8080/thread/?id=6269b6d71cdf1ee668643eee
 
 Because of an API issue the replies don't display, though the code is already there.
 This is how the page appears with data hard-coded in:
-![alt text](/images/Thread.png.png)
+![alt text](images/Thread.png.png)
