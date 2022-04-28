@@ -21,6 +21,8 @@ How to Run
 |     Kevin Lau     |    [Kevinlau24](https://github.com/KevinLau24)    |
 |    John Tovera    |   [John-Tovera](https://github.com/John-Tovera)   |
 
+### Front-End
+
 [Independent.Study.Web.App.Dev.pdf](https://github.com/ThinhLe188/csci3230u_chat-forum/files/8577691/Independent.Study.Web.App.Dev.pdf)
 
 A Thread page exists but can't be accessed normally because the home page doesn't populate.
@@ -30,7 +32,9 @@ Because of an API issue the replies don't display, though the code is already th
 This is how the page appears with data hard-coded in:
 ![alt text](images/Thread.png)
 
-Database:
+### Back-End
+
+The backend features, include database and API requests work properly
 
 For users:
 ![alt text](images/User_db.png)
