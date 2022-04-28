@@ -55,15 +55,25 @@
       <div class="col-1">
       </div>
     </div>
-
+    <ReplyModal/>
   </div>
 </template>
 
 <script>
+import ReplyModal from '../components/ReplyModal.vue'
+
+export default {
+  name: 'ThreadView',
+  components: {
+    ReplyModal
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   var postId = 1
   var mainThread = getThread(postId)
 
+  setReply('1')
   document.getElementById('thread_title').innerHTML = mainThread.title
 
   document.getElementById('poster_name').innerHTML = getUsername(mainThread.creatorId)
@@ -91,6 +101,10 @@ function getThread (id) {
   }
 }
 
+function setReply (id) {
+  localStorage.setItem('reply', id)
+}
+
 function getUsername (id) {
   return 'Joe Username'
 }
@@ -113,6 +127,7 @@ function buildComment (id, parentDiv) {
   var comment = getThread(id)
   var elementA = null
   var elementB = null
+  var elementC = null
 
   var spacer = document.createElement('div')
   spacer.setAttribute('style', 'height:10px')
@@ -165,11 +180,21 @@ function buildComment (id, parentDiv) {
   elementB = document.createElement('i')
   elementB.setAttribute('class', 'bi bi-hand-thumbs-down hover_button dislike')
   elementA.appendChild(elementB)
+
   // Reply
-  elementB = document.createElement('i')
-  elementB.setAttribute('class', 'bi bi-reply hover_button reply')
-  elementB.setAttribute('style', 'padding-left:8px;padding-right:8px')
+  elementB = document.createElement('button')
+  // elementB.setAttribute('type', 'button')
+  elementB.setAttribute('class', 'invisiButton')
+  elementB.setAttribute('id', id)
+  elementB.setAttribute('onClick', '(function(){ localStorage.setItem("reply", ' + id + ') })()')
+  elementB.setAttribute('data-toggle', 'modal')
+  elementB.setAttribute('data-target', '#exampleModal')
   elementA.appendChild(elementB)
+
+  elementC = document.createElement('i')
+  elementC.setAttribute('class', 'bi bi-reply hover_button reply')
+  elementC.setAttribute('style', 'padding-left:8px;padding-right:8px')
+  elementB.appendChild(elementC)
 
   // Replies
   elementA = document.createElement('div')
@@ -212,6 +237,16 @@ textarea {
   color: blue;
 }
 .hover_button:hover {
+  cursor: pointer;
+}
+.invisiButton {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  text-decoration: underline;
   cursor: pointer;
 }
 </style>
