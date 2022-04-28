@@ -22,3 +22,10 @@ How to Run
 |    John Tovera    |   [John-Tovera](https://github.com/John-Tovera)   |
 
 [Independent.Study.Web.App.Dev.pdf](https://github.com/ThinhLe188/csci3230u_chat-forum/files/8577691/Independent.Study.Web.App.Dev.pdf)
+
+A Thread page exists but can't be accessed normally because the home page doesn't populate. 
+You can find it here: http://localhost:8080/thread/?id=6269b6d71cdf1ee668643eee 
+
+Because of an API issue the replies don't display, though the code is already there.
+This is how the page appears with data hard-coded in:
+![alt text](/images/Thread.png.png)
