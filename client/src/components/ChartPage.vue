@@ -9,8 +9,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-body" id="chart">
+            <h5>User Post / Comment / Likes Ratio </h5>
             <svg class="chart" width="300" height="200"></svg>
-            {{stat}}
+            <div id="legend"><div class='box green'></div>= Post</div>
+            <br>
+            <div><div class='box blue'></div>= Comment</div>
+            <br>
+            <div><div class='box orange'></div>= Likes</div>
           </div>
           <div class="modal-footer d-flex justify-content-center">
             <button
@@ -43,7 +48,7 @@ export default {
     var height = svg.attr('height')
     var radius = Math.min(width, height) / 2
     var g = svg.append('g').attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-    var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00', '#984ea3', '#e41a1c'])
+    var color = d3.scaleOrdinal(['#4daf4a', '#377eb8', '#ff7f00'])
     var pie = d3.pie()
     var arc = d3.arc()
       .innerRadius(0)
@@ -63,12 +68,34 @@ export default {
 </script>
 
 <style>
-  .chart rect {
-    fill: blue;
+  h5 {
+    text-align: center;
+    margin-bottom: 15px;
   }
-  .chart text {
-    fill: white;
-    font: 10px sans-serif;
-    text-anchor: end;
+
+  #legend {
+    margin-top: 15px;
+  }
+
+  .box {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    margin-right: 5px;
+    border: 1px solid black;
+    clear: both;
+  }
+
+  .green {
+  background-color: #4daf4a;
+  }
+
+  .blue {
+    background-color: #377eb8;
+  }
+
+  .orange {
+    background-color: #ff7f00;
   }
 </style>
