@@ -72,8 +72,9 @@ export default {
 }
 document.addEventListener('DOMContentLoaded', async function () {
   var postId = 1
-
-  getThread(postId).then((mainThread) => {
+  var id = '6269b062717bc733e4278306'
+  Thread.getPostById(id, (res) => {
+    var mainThread = res.post
     setReply('1')
     document.getElementById('thread_title').innerHTML = mainThread.title
 

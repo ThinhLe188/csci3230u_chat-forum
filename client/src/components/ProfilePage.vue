@@ -41,7 +41,7 @@
           </div>
       </div>
       <!-- Chart -->
-      <ChartPage/>
+      <ChartPage :stat="stat"/>
   </div>
 </template>
 

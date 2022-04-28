@@ -41,12 +41,18 @@ import * as d3 from 'd3'
 export default {
   name: 'ChartPage',
   props: {
-    stat: Array
+    userStat: Object
+  },
+  data () {
+    return {
+      stat: []
+    }
   },
   mounted () {
-    // hard code user data here
-    var data = [2, 40, 60]
-
+    this.stat = Object.values(this.userStat)
+  },
+  created: function () {
+    var data = this.userStat
     var svg = d3.select('svg')
     var width = svg.attr('width')
     var height = svg.attr('height')
