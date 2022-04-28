@@ -31,7 +31,7 @@
                   </ul>
               </div>
               <div class="py-4 px-4">
-                  <div class="d-flex align-items-center justify-content-between mb-3">
+                  <div class="d-flex align-items-center justify-content-center mb-3">
                       <h5 class="mb-0">Recent Threads</h5>
                   </div>
                   <!-- insert recent thread here -->
@@ -74,7 +74,13 @@ export default {
 
 <style>
   .profile_page {
-    background: linear-gradient(to right, #009fff, #ec2f4b);
+    background:
+      linear-gradient(135deg, black 25%, transparent 25%) -50px 0,
+      linear-gradient(225deg, black 25%, transparent 25%) -50px 0,
+      linear-gradient(315deg, black 25%, transparent 25%),
+      linear-gradient(45deg, black 25%, transparent 25%);
+      background-size: 2em 2em;
+      background-color: #161616;
   }
 
   .profile-head {

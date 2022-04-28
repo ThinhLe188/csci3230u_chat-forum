@@ -8,14 +8,18 @@
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-body" id="chart">
-            <h5>User Post / Comment / Likes Ratio </h5>
-            <svg class="chart" width="300" height="200"></svg>
-            <div id="legend"><div class='box green'></div>= Post</div>
-            <br>
-            <div><div class='box blue'></div>= Comment</div>
-            <br>
-            <div><div class='box orange'></div>= Likes</div>
+          <div class="modal-body d-flex flex-column justify-content-center" id="chart">
+            <h5>User Post / Comment / Likes Ratio</h5>
+            <div class="d-flex justify-content-center mt-4">
+              <svg class="chart" width="300" height="200"></svg>
+            </div>
+            <div id="legend" class="d-flex justify-content-center mt-4">
+              <div><div class='box green'></div>= Post </div>
+              <br>
+              <div><div class='box blue'></div>= Comment </div>
+              <br>
+              <div><div class='box orange'></div>= Likes </div>
+            </div>
           </div>
           <div class="modal-footer d-flex justify-content-center">
             <button
@@ -58,6 +62,7 @@ export default {
       .enter()
       .append('g')
       .attr('class', 'arc')
+      .attr('stroke', 'black')
     arcs.append('path')
       .attr('fill', function (d, i) {
         return color(i)
@@ -69,12 +74,12 @@ export default {
 
 <style>
   h5 {
+    font-weight: bold;
     text-align: center;
-    margin-bottom: 15px;
   }
 
   #legend {
-    margin-top: 15px;
+    font-weight: bold;
   }
 
   .box {
@@ -83,6 +88,7 @@ export default {
     width: 20px;
     margin-bottom: 15px;
     margin-right: 5px;
+    margin-left: 15px;
     border: 1px solid black;
     clear: both;
   }
