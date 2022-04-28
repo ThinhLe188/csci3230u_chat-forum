@@ -23,9 +23,19 @@ How to Run
 
 [Independent.Study.Web.App.Dev.pdf](https://github.com/ThinhLe188/csci3230u_chat-forum/files/8577691/Independent.Study.Web.App.Dev.pdf)
 
-A Thread page exists but can't be accessed normally because the home page doesn't populate. 
+A Thread page exists but can't be accessed normally because the home page doesn't populate.
 You can find it here: http://localhost:8080/thread/?id=626a0a38cdcf388e4aa2263e
 
 Because of an API issue the replies don't display, though the code is already there.
 This is how the page appears with data hard-coded in:
 ![alt text](images/Thread.png)
+
+Database:
+
+For users:
+![alt text](images/User_db.png)
+
+For posts and comments:
+![alt text](images/Thread_db_1.png)
+
+![alt text](images/Thread_db_2.png)
