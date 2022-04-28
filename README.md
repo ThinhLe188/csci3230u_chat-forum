@@ -30,6 +30,7 @@ You can find it here: http://localhost:8080/thread/?id=626a0a38cdcf388e4aa2263e
 
 Because of an API issue the replies don't display, though the code is already there.
 This is how the page appears with data hard-coded in:
+
 ![alt text](images/Thread.png)
 
 ### Back-End
@@ -37,9 +38,11 @@ This is how the page appears with data hard-coded in:
 The backend features, include database and API requests work properly
 
 For users:
+
 ![alt text](images/User_db.png)
 
 For posts and comments:
+
 ![alt text](images/Thread_db_1.png)
 
 ![alt text](images/Thread_db_2.png)
