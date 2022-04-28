@@ -71,8 +71,10 @@ export default {
   }
 }
 document.addEventListener('DOMContentLoaded', async function () {
-  var postId = 1
-  var id = '6269b062717bc733e4278306'
+  // var postId = 1
+  const queryString = window.location.search
+  var url = new URLSearchParams(queryString)
+  var id = url.get('id') // '6269b062717bc733e4278306'
   Thread.getPostById(id, (res) => {
     var mainThread = res.post
     setReply('1')
@@ -87,17 +89,9 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     document.getElementById('likes').innerHTML = mainThread.votes
 
-    buildCommentSection(getReplies(postId), document.getElementById('comment_section'))
+    buildCommentSection(id, document.getElementById('comment_section'))
   })
 }, false)
-
-async function getThread (id) {
-  id = '6269b062717bc733e4278306'
-  var thread = await Thread.getPostById(id, (res) => {
-    console.log(res)
-  })
-  return thread.post
-}
 
 function setReply (id) {
   localStorage.setItem('reply', id)
@@ -107,22 +101,17 @@ function getUsername (id) {
   return 'Joe Username'
 }
 
-function getReplies (id) {
-  if (id === 1) {
-    return [2, 3, 4]
-  } else if (id === 3) {
-    return [5]
-  } else {
-    return []
-  }
-}
 function buildCommentSection (replies, parentDiv) {
-  for (var i = 0; i < replies.length; i++) {
-    buildComment(replies[i], parentDiv)
-  }
+  console.log(replies)
+  Thread.getComments(replies, (res) => {
+    console.log(res)
+    var myReplies = res.comments
+    for (var i = 0; i < myReplies.length; i++) {
+      buildComment(myReplies[i], parentDiv)
+    }
+  })
 }
-function buildComment (id, parentDiv) {
-  var comment = getThread(id)
+function buildComment (comment, parentDiv) {
   var elementA = null
   var elementB = null
   var elementC = null
@@ -171,7 +160,7 @@ function buildComment (id, parentDiv) {
   elementA.appendChild(elementB)
   // Like Count
   elementB = document.createElement('div')
-  elementB.setAttribute('id', id + '_likes')
+  elementB.setAttribute('id', comment._id + '_likes')
   elementB.innerHTML = comment.votes
   elementB.setAttribute('style', 'padding-left:8px;padding-right:8px')
   elementA.appendChild(elementB)
@@ -184,8 +173,8 @@ function buildComment (id, parentDiv) {
   elementB = document.createElement('button')
   // elementB.setAttribute('type', 'button')
   elementB.setAttribute('class', 'invisiButton')
-  elementB.setAttribute('id', id)
-  elementB.setAttribute('onClick', '(function(){ localStorage.setItem("reply", ' + id + ') })()')
+  elementB.setAttribute('id', comment._id)
+  elementB.setAttribute('onClick', '(function(){ localStorage.setItem("reply", ' + comment._id + ') })()')
   elementB.setAttribute('data-toggle', 'modal')
   elementB.setAttribute('data-target', '#exampleModal')
   elementA.appendChild(elementB)
@@ -207,7 +196,7 @@ function buildComment (id, parentDiv) {
   elementB = document.createElement('div')
   elementB.setAttribute('class', 'col-11')
   elementA.appendChild(elementB)
-  buildCommentSection(getReplies(id), elementB)
+  buildCommentSection(comment._id, elementB)
 }
 </script>
 
